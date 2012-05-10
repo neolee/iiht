@@ -11,23 +11,22 @@ class User
   property :twitter, String
   property :email, String
   property :password, String
-  property :enabled, String
+  property :enabled, Boolean, :default  => true
   property :created_at, DateTime
 end
 
 class Post
   include DataMapper::Resource
   property :id, Serial
-  property :title, String
+  property :title, String, :required => true 
   property :body, Text
-  property :body_type, String
   property :created_at, DateTime
 end
 
 class Vote
   include DataMapper::Resource
   property :id, Serial
-  property :love, String
+  property :love, Boolean, :default  => true
   property :created_at, DateTime
 end
 
@@ -35,7 +34,7 @@ class Comment
   include DataMapper::Resource
   property :id, Serial
   property :body, Text
-  property :hidden, String
+  property :hidden, Boolean, :default  => false
   property :created_at, DateTime
 end
 
