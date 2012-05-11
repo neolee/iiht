@@ -5,3 +5,26 @@
     \- 
     %em
       If I Have Time...
+  %p
+    %a{:href => url_for("/post/new")}
+      Write down new wish
+  %p
+    [All wishes]
+  %table{:border => 0, :cellpadding => 0, :cellspacing => 5}
+    - @posts.each do |post|
+    - user = User.first(:id => post.user.id)  
+      %tr
+        %td
+          = post.created_at.strftime("%m/%d/%Y %H:%M")
+          |
+        %td
+          %a{:href => url_for("user/#{user.id}")}
+            = user.username
+        %td
+          %a{:href => url_for("post/#{post.id}")}
+            = post.title
+      %tr
+        %td
+          &nbsp;
+        %td{:colspan => 2}
+          = post.body

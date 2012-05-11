@@ -1,0 +1,14 @@
+%body
+  %h3
+    New things to do when you have time
+  %form{:action => url_for("/post/"), :method => "post"}
+    %fieldset
+      %legend Fill all fields and click the Create button: 
+      %p
+        %label{:for => "title"} Title:
+        %input{:type => "text", :size => "30", :name => "title", :class => "text"}
+      %p
+        %textarea{:rows => "10", :cols => 30, :name => "body", :class => "text"}
+      %p
+        %input{:type => "submit", :value => "Create", :class => "button"}
+ 
