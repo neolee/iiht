@@ -1,0 +1,8 @@
+%h3 
+  Auth from 
+  = params[:provider]
+%p
+  %img{:src => @user.avatar}
+  = @user.username
+%pre
+  = JSON.pretty_generate(@auth)

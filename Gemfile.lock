@@ -57,13 +57,23 @@ GEM
     eventmachine (0.12.10)
     fastercsv (1.5.4)
     haml (3.1.5)
+    hashie (1.2.0)
     httparty (0.8.3)
       multi_json (~> 1.0)
       multi_xml
     json (1.6.7)
     json_pure (1.6.7)
     multi_json (1.0.4)
-    multi_xml (0.5.0)
+    multi_xml (0.5.1)
+    oauth (0.4.6)
+    omniauth (1.1.0)
+      hashie (~> 1.2)
+      rack
+    omniauth-oauth (1.0.1)
+      oauth
+      omniauth (~> 1.0)
+    omniauth-twitter (0.0.9)
+      omniauth-oauth (~> 1.0)
     rack (1.4.1)
     rack-protection (1.2.0)
       rack
@@ -96,6 +106,8 @@ DEPENDENCIES
   emk-sinatra-url-for
   haml
   httparty
+  omniauth
+  omniauth-twitter
   rack
   sinatra
   sinatra-contrib
