@@ -26,3 +26,7 @@ footer {
   margin-top: -18px;
   margin-left: -18px;
 }
+
+#alert {
+  display: none;
+}

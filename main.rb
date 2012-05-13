@@ -88,5 +88,9 @@ module IIHT
       redirect "/users/#{params[:id]}"
     end
 
+    get 'posts/:id' do
+
+    end
+    
   end
 end
