@@ -91,6 +91,6 @@ module IIHT
     get 'posts/:id' do
 
     end
-    
+
   end
 end
