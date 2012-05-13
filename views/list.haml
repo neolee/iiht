@@ -1,0 +1,14 @@
+%table.table.table-striped.table-bordered.table-condensed
+  - @posts.each do |post|
+  - user = User.get(post.user.id)  
+    %tr
+      %td
+        %a{:href => url_for("posts/#{post.id}")}
+          = post.title
+      %td
+        %a{:href => url_for("users/#{user.id}")}
+          = user.username
+        = "at #{post.created_at.strftime("%m/%d/%Y %H:%M")}"
+    %tr
+      %td{:colspan => 2}
+        = post.body

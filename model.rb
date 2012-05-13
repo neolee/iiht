@@ -1,7 +1,7 @@
 require 'rubygems' if RUBY_VERSION < "1.9"
 require 'data_mapper'
 
-DataMapper::Logger.new($stdout, :debug)
+# DataMapper::Logger.new($stdout, :debug)
 DataMapper.setup(:default, 'mysql://iiht:nirvana@localhost/iiht')
 
 # Entities

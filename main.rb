@@ -3,6 +3,7 @@ require 'sinatra/url_for'
 require 'omniauth'
 
 require File.join(File.dirname(__FILE__), 'model.rb')
+$: << File.join(File.dirname(__FILE__), '/lib')
 
 module IIHT
   class Main < Base
@@ -17,33 +18,17 @@ module IIHT
     end
 
     # Filters
-    before '/' do
-      redirect url_for('/login') unless session[:user_id]
+    ["/", "/posts/*"].each do |path|
+      before path do
+        if !session[:user_id] then
+          session[:previous_url] = request.path
+          redirect '/login'
+        end
+      end
     end
 
     # Routes
-    get '/' do
-      @posts = Post.all(:order => [ :created_at.desc ])
-      haml :index
-    end
-
-    get '/post/new/?' do
-      haml :new_post
-    end
-
-    post '/post/?' do
-      post = Post.new(
-        :title      => params[:title],
-        :body       => params[:body],
-        :created_at => Time.now
-      )
-      post.user = User.first(:id => session[:user_id])
-      post.save
-
-      redirect '/'
-    end
-
-    get "/login/?" do
+    get '/login/?' do
       haml :login
     end
 
@@ -59,7 +44,47 @@ module IIHT
       session[:user_id] = @user.id
       session[:username] = @user.username
 
-      haml :auth_callback
+      if session[:previous_url] then
+        redirect_to = session[:previous_url]
+        session[:previous_url] = nil
+        redirect redirect_to
+      else
+        haml :auth_callback
+      end
+    end
+
+    ["/", "/posts/?"].each do |path|
+      get path do
+        @posts = Post.all(:order => [ :created_at.desc ])
+        haml :list
+      end
+    end
+
+    get '/posts/new/?' do
+      haml :new
+    end
+
+    post '/posts/?' do
+      post = Post.new(
+        :title      => params[:title],
+        :body       => params[:body],
+        :created_at => Time.now
+      )
+      post.user = User.first(:id => session[:user_id])
+      post.save
+
+      redirect '/posts/'
+    end
+
+    get '/users/:id' do
+      @user = User.get(params[:id])
+      haml :user
+    end
+
+    patch '/users/:id' do
+      user = User.get(params[:id])
+      user.update(:email => params[:email], :password => params[:password])
+      redirect "/users/#{params[:id]}"
     end
 
   end

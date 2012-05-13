@@ -5,13 +5,20 @@
 				%span.icon-bar
 				%span.icon-bar
 				%span.icon-bar
-			%a.brand{:href => '/'} IIHT - If I Have Time
+			%a.brand{:href => '/'}
+				=(session[:username]?"#{session[:username]} : ":"") + "If I Have Time"
 			.nav-collapse
 				%ul.nav
 					%li
-						%a{:href => '/'}Home
+						%a{:href => '/'}
+							%i.icon-home.icon-white
+							Home
 					%li
-						%a{:href => '/post/new'}New
+						%a{:href => '/posts/new'}
+							%i.icon-plus.icon-white
+							New
 					%li
-						%a{:href => '/'}Search
+						%a{:href => '/'}
+							%i.icon-search.icon-white
+							Search
 						

@@ -1,0 +1,35 @@
+#info{:style => "width:100px;float:left"}
+  %dl
+    %dt
+      User
+    %dd
+      = @user.username
+    %dt
+      Avatar
+    %dd
+      %img{:src => @user.avatar}
+    %dt
+      Twitter
+    %dd
+      %a{:href => "https://twitter.com/#!/#{@user.twitter}"}
+        = "@#{@user.twitter}"
+- if @user.id == session[:user_id] then
+  #changeable{:style => "float:left;padding-top:14px;"}
+    %form.form-horizontal#formUser{:action => url_for("/users/#{@user.id}"), :method => "patch"}
+      %fieldset
+        .control-group
+          %label{:for => "email"} Email
+          .controls
+            %input.input-xlarge{:type => "text", :name => "email", :value => @user.email, :autofocus => "autofocus"}
+            %p.help-block Add your email address to reset password.
+          %p &nbsp;
+          %label{:for => "password"} Password
+          .controls
+            %input.input-xlarge{:type => "password", :name => "password", :value => @user.password}
+            %p.help-block Password is needed for destroying your account and/or posts.
+          %p &nbsp;
+          .controls
+            %input.btn.btn-primary{:type => "submit", :value => "Save"}
+            #msgSave.help-block
+
+%script{ :type => "text/javascript", :src => "/js/user.js"}

@@ -14,12 +14,12 @@
 
     / Le styles
     %link{ :href => "/bootstrap/css/bootstrap.css", :type => "text/css", :rel => "stylesheet" }
-  
-    / add body padding styles
-    %link{ :href => "/css/styles.css", :type => "text/css", :rel => "stylesheet" }
-
-  
     %link{ :href => "/bootstrap/css/bootstrap-responsive.css", :type => "text/css", :rel => "stylesheet" }  
+
+    / Custom styles and scripts
+    %link{ :href => "/css/styles.css", :type => "text/css", :rel => "stylesheet" }
+    %script{ :type => "text/javascript", :src => "/js/jquery.min.js"}
+    %script{ :type => "text/javascript", :src => "/js/base.js"}
 
     / Le fav and touch icons 
     %link{ rel: "apple-touch-icon", href: "/bootstrap/images/apple-touch-icon.png"}
@@ -39,7 +39,6 @@
 
 
     / Placed at the end of the document so the pages load faster
-    %script{ :type => "text/javascript", :src =>"/bootstrap/js/jquery.js"}
     %script{ :type => "text/javascript", :src =>"/bootstrap/js/basic/bootstrap-transition.js"}
     %script{ :type => "text/javascript", :src =>"/bootstrap/js/basic/bootstrap-alert.js"}
     %script{ :type => "text/javascript", :src =>"/bootstrap/js/basic/bootstrap-modal.js"}
@@ -52,3 +51,5 @@
     %script{ :type => "text/javascript", :src =>"/bootstrap/js/basic/bootstrap-collapse.js"}
     %script{ :type => "text/javascript", :src =>"/bootstrap/js/basic/bootstrap-carousel.js"}
     %script{ :type => "text/javascript", :src =>"/bootstrap/js/basic/bootstrap-typeahead.js"}
+
+    %img#spinner{:src => "/img/spinner.gif"}

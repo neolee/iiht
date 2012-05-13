@@ -9,11 +9,20 @@ footer {
   min-height: 100%;
   height: auto !important;
   height: 100%;
-  margin: 0 auto -80px;
+  margin: 0 auto -50px;
 }
 .push {
-  height: 80px;
+  height: 50px;
 }
 .wrapper > .container {
   padding-top: 60px;
+}
+
+#spinner {
+  display: none;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-top: -18px;
+  margin-left: -18px;
 }
