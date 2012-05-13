@@ -11,4 +11,4 @@
         = "at #{post.created_at.strftime("%m/%d/%Y %H:%M")}"
     %tr
       %td{:colspan => 2}
-        = post.body
+        = truncate_html(markdown(post.body), 200)

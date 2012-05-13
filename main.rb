@@ -4,9 +4,11 @@ require 'omniauth'
 
 require File.join(File.dirname(__FILE__), 'model.rb')
 $: << File.join(File.dirname(__FILE__), '/lib')
+require 'string.rb'
 
 module IIHT
   class Main < Base
+    register Sinatra::MultiRoute
 
     set :root, File.dirname(__FILE__)
 
@@ -54,11 +56,9 @@ module IIHT
       end
     end
 
-    ["/", "/posts/?"].each do |path|
-      get path do
-        @posts = Post.all(:order => [ :created_at.desc ])
-        haml :list
-      end
+    get '/', '/posts/?' do
+      @posts = Post.all(:order => [ :created_at.desc ])
+      haml :list
     end
 
     get '/posts/new/?' do
@@ -88,8 +88,9 @@ module IIHT
       redirect "/users/#{params[:id]}"
     end
 
-    get 'posts/:id' do
-
+    get '/posts/:id' do
+      @post = Post.get(params[:id])
+      haml :post
     end
 
   end

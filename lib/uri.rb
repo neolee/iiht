@@ -1,3 +1,4 @@
+# hashmap -> query string
 def cgi_escape(string)
   string.gsub(/([^ a-zA-Z0-9_.-]+)/n) do
     '%' + $1.unpack('H2' * $1.size).join('%').upcase
