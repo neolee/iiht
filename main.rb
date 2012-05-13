@@ -85,12 +85,16 @@ module IIHT
     patch '/users/:id' do
       user = User.get(params[:id])
       user.update(:email => params[:email], :password => params[:password])
-      redirect "/users/#{params[:id]}"
     end
 
     get '/posts/:id' do
       @post = Post.get(params[:id])
       haml :post
+    end
+
+    patch '/posts/:id' do
+      post = Post.get(params[:id])
+      post.update(:title => params[:title], :body => params[:body])
     end
 
   end

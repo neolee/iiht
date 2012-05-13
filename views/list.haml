@@ -1,6 +1,6 @@
 %table.table.table-striped.table-bordered.table-condensed
   - @posts.each do |post|
-  - user = User.get(post.user.id)  
+  - user = User.get(post.user.id)
     %tr
       %td
         %a{:href => url_for("/posts/#{post.id}")}

@@ -30,3 +30,9 @@ footer {
 #alert {
   display: none;
 }
+
+.modal {
+  display: none;
+   width: 800px;
+   margin-left: -400px;
+}
