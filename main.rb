@@ -49,7 +49,8 @@ module IIHT
         session[:previous_url] = nil
         redirect redirect_to
       else
-        haml :auth_callback
+        # haml :auth_callback
+        redirect '/'
       end
     end
 

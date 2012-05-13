@@ -3,10 +3,10 @@
   - user = User.get(post.user.id)  
     %tr
       %td
-        %a{:href => url_for("posts/#{post.id}")}
+        %a{:href => url_for("/posts/#{post.id}")}
           = post.title
       %td
-        %a{:href => url_for("users/#{user.id}")}
+        %a{:href => url_for("/users/#{user.id}")}
           = user.username
         = "at #{post.created_at.strftime("%m/%d/%Y %H:%M")}"
     %tr
