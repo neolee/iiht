@@ -83,8 +83,10 @@ module IIHT
     end
 
     patch '/users/:id' do
-      user = User.get(params[:id])
-      user.update(:email => params[:email], :password => params[:password])
+      if params[:id] == session[:user_id] then
+        user = User.get(params[:id])
+        user.update(:email => params[:email], :password => params[:password])
+      end
     end
 
     get '/posts/:id' do
@@ -94,7 +96,9 @@ module IIHT
 
     patch '/posts/:id' do
       post = Post.get(params[:id])
-      post.update(:title => params[:title], :body => params[:body])
+      if post.user_id == session[:user_id] then
+        post.update(:title => params[:title], :body => params[:body])
+      end
     end
 
   end

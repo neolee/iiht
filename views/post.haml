@@ -7,8 +7,9 @@
     = user.username
   = "at #{@post.created_at.strftime("%m/%d/%Y %H:%M")}"
 %p &nbsp;
-%p
-  %a.btn(data-toggle="modal" href="#modalEdit")Edit
+- if user.id == session[:user_id] then
+  %p
+    %a.btn(data-toggle="modal" href="#modalEdit")Edit
 %p
   = markdown(@post.body)
 
