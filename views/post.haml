@@ -5,7 +5,7 @@
   by 
   %a{:href => url_for("/users/#{user.id}")}
     = user.username
-  = "at #{@post.created_at.strftime("%m/%d/%Y %H:%M")}"
+  = (@post.edited_at.nil? ? "created at #{dt_fmt(@post.created_at)}" : "edited at #{dt_fmt(@post.edited_at)}")
 %p &nbsp;
 - if user.id == session[:user_id] then
   %p

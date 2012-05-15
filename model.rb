@@ -23,6 +23,7 @@ class Post
   property :title, String, :length => 140, :required => true 
   property :body, Text
   property :created_at, DateTime
+  property :edited_at, DateTime
 end
 
 class Vote

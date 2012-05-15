@@ -1,18 +1,11 @@
 require 'rubygems' if RUBY_VERSION < "1.9"
-require 'sinatra/url_for'
 require 'omniauth'
 
 require File.join(File.dirname(__FILE__), 'model.rb')
-$: << File.join(File.dirname(__FILE__), '/lib')
-require 'string.rb'
 
 module IIHT
   class Main < Base
-    register Sinatra::MultiRoute
-
     set :root, File.dirname(__FILE__)
-
-    helpers Sinatra::UrlForHelper
 
     use Rack::Session::Cookie
     use OmniAuth::Builder do
@@ -97,7 +90,7 @@ module IIHT
     patch '/posts/:id' do
       post = Post.get(params[:id])
       if post.user_id == session[:user_id] then
-        post.update(:title => params[:title], :body => params[:body])
+        post.update(:title => params[:title], :body => params[:body], :edited_at => Time.now)
       end
     end
 

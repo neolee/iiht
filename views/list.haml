@@ -8,7 +8,7 @@
       %td
         %a{:href => url_for("/users/#{user.id}")}
           = user.username
-        = "at #{post.created_at.strftime("%m/%d/%Y %H:%M")}"
+        = (post.edited_at.nil? ? "created at #{dt_fmt(post.created_at)}" : "edited at #{dt_fmt(post.edited_at)}")
     %tr
       %td{:colspan => 2}
         = truncate_html(markdown(post.body), 200)

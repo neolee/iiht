@@ -1,6 +1,19 @@
 require 'rubygems' if RUBY_VERSION < "1.9"
+require 'sinatra/url_for'
+
+$: << File.join(File.dirname(__FILE__), '/helpers')
+require 'dt.rb'
+require 'html.rb'
+require 'http.rb'
+require 'string.rb'
 
 class Base < Sinatra::Base
+  register Sinatra::MultiRoute
+
+  register PXHelpers::DateTime
+  register PXHelpers::HTML
+  register PXHelpers::HTTP
+  register PXHelpers::String
 
   configure :development do
     enable  :sessions, :clean_trace, :inline_templates, :logging
@@ -10,7 +23,15 @@ class Base < Sinatra::Base
     set :session_secret, 'shotgun sucks on sessions'
   end
 
-  enable :static, :sessions
-  set :haml, { :format => :html5 }
+  configure do
+    enable :static, :sessions
+    set :haml, { :format => :html5 }
+  end
 
+  helpers Sinatra::UrlForHelper
+
+  helpers PXHelpers::DateTime
+  helpers PXHelpers::HTML
+  helpers PXHelpers::HTTP
+  helpers PXHelpers::String
 end
