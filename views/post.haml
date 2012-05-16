@@ -10,29 +10,8 @@
 - if user.id == session[:user_id] then
   %p
     %a.btn(data-toggle="modal" href="#modalEdit")Edit
+  %p &nbsp;
 %p
   = markdown(@post.body)
 
-.modal.fade#modalEdit
-  .modal-header
-    .close(data-dismiss="modal")x
-    %h3 Edit
-  .modal-body
-    %form.form-horizontal#formPost{:action => url_for("/posts/#{@post.id}"), :method => "patch"}
-      %fieldset
-        .control-group
-          %label{:for => "title"} If I have time
-          .controls
-            %input.input-xxlarge{:type => "text", :name => "title", :value => @post.title, :autofocus => "autofocus"}
-            %p.help-block What do you wanna do?
-          %p &nbsp;
-          %label{:for => "body"} which means
-          .controls
-            %textarea.input-xxlarge{:rows => "10", :name => "body"}= @post.body
-            %p.help-block (Optional) details for that?
-  .modal-footer
-    #alert.alert.alert-info
-    %a.btn#btnClose(data-dismiss="modal")Close
-    %a.btn.btn-primary#btnSave Save
-
-%script{ :type => "text/javascript", :src => "/js/post.js"}
+= haml :_post_form, :locals => {:mode => "edit"}

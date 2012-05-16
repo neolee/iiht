@@ -27,12 +27,12 @@ footer {
   margin-left: -18px;
 }
 
-#alert {
+.alert[id*='alert'] {
   display: none;
 }
 
 .modal {
   display: none;
-   width: 800px;
-   margin-left: -400px;
+  width: 800px;
+  margin-left: -400px;
 }

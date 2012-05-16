@@ -14,11 +14,12 @@
 							%i.icon-home.icon-white
 							Home
 					%li
-						%a{:href => '/posts/new'}
+						%a(data-toggle="modal" href="#modalNew")
 							%i.icon-plus.icon-white
 							New
 					%li
 						%a{:href => '/'}
 							%i.icon-search.icon-white
 							Search
-						
+
+= haml :_post_form, :locals => {:mode => "new"}

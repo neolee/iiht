@@ -1,0 +1,60 @@
+- modal_id = (locals[:mode] == 'new' ? 'modalNew' : 'modalEdit')
+- modal_title = (locals[:mode] == 'new' ? 'New' : 'Edit')
+- form_id = (locals[:mode] == 'new' ? 'formNew' : 'formPost')
+- form_action = (locals[:mode] == 'new' ? url_for('/posts/') : url_for("/posts/#{@post.id}"))
+- form_method = (locals[:mode] == 'new' ? 'post' : 'patch')
+- form_title = (locals[:mode] == 'new' ? '' : @post.title)
+- form_body = (locals[:mode] == 'new' ? '' : @post.body)
+- commit_id = (locals[:mode] == 'new' ? 'btnCreate' : 'btnSave')
+- commit_label = (locals[:mode] == 'new' ? 'Create' : 'Save')
+- alert_id = (locals[:mode] == 'new' ? 'alertCreate' : 'alertSave')
+
+.modal{:id => modal_id}
+  .modal-header
+    .close(data-dismiss="modal")x
+    %h3= modal_title
+  .modal-body
+    %form.form-horizontal{:id => form_id, :action => form_action, :method => form_method}
+      %fieldset
+        .control-group
+          %label{:for => "title"} If I have time
+          .controls
+            %input.input-xxlarge{:type => "text", :name => "title", :value => form_title, :autofocus => "autofocus"}
+            %p.help-block What do you wanna do?
+          %p &nbsp;
+          %label{:for => "body"} which means
+          .controls
+            %textarea.input-xxlarge{:rows => "10", :name => "body"}= form_body
+            %p.help-block (Optional) details for that?
+  .modal-footer
+    .alert.alert-info{:id => alert_id}
+    %a.btn#btnClose(data-dismiss="modal")Close
+    %a.btn.btn-primary{:id => commit_id}= commit_label
+
+:javascript
+  $('##{commit_id}').click(function(event) {
+    $('##{alert_id}').removeClass('alert-success alert-error').addClass('alert-info');
+    $('##{alert_id}').show().text('Saving...');
+
+    $.ajax({
+      type: $('##{form_id}').attr('method'),
+      url: $('##{form_id}').attr('action'),
+      data: $('##{form_id}').serialize(),
+      success: function(data) {
+        $('##{alert_id}').removeClass('alert-info').addClass('alert-success');
+        $('##{alert_id}').text('Saved').fadeOut('slow');
+        if ('#{locals[:mode]}' == 'new') {
+          location = '/';
+        }
+        else {
+          location.reload();
+        }
+      },
+      error: function(data) {
+        $('##{alert_id}').removeClass('alert-info').addClass('alert-error');
+        $('##{alert_id}').text('Failed');
+      },
+    });
+
+    return false;
+  });
