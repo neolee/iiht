@@ -1,4 +1,4 @@
-#info{:style => "width:100px;float:left"}
+#info{:style => "width:120px;float:left"}
   %dl
     %dt
       User
@@ -13,20 +13,28 @@
     %dd
       %a{:href => "https://twitter.com/#!/#{@user.twitter}"}
         = "@#{@user.twitter}"
-- if @user.id == session[:user_id] then
-  #changeable{:style => "float:left;padding-top:14px;"}
+- if @user.id == session[:user_id].to_i then
+  #changeable{:style => "float:left;padding-top:12px"}
     %form.form-horizontal#formUser{:action => url_for("/users/#{@user.id}"), :method => "patch"}
       %fieldset
         .control-group
-          %label{:for => "email"} Email
+          %label{:for => "current_password"} Current password
           .controls
-            %input.input-xlarge{:type => "text", :name => "email", :value => @user.email, :autofocus => "autofocus"}
-            %p.help-block Add your email address to reset password.
+            %input.input-xlarge{:type => "password", :name => "current_password", :autofocus => "autofocus"}
+            %p.help-block You need to fill in the current password to continue.
           %p &nbsp;
-          %label{:for => "password"} Password
+          %label{:for => "email"} Email address
           .controls
-            %input.input-xlarge{:type => "password", :name => "password", :value => @user.password}
-            %p.help-block Password is needed for destroying your account and/or posts.
+            %input.input-xlarge{:type => "text", :name => "email", :value => @user.email}
+            %p.help-block Email address can be use to reset your password.
+          %p &nbsp;
+          %label{:for => "new_password"} Change password
+          .controls
+            %input.input-xlarge{:type => "password", :name => "new_password"}
+          %label{:for => "new_password_confirm"} Repeat new password
+          .controls
+            %input.input-xlarge{:type => "password", :name => "new_password_confirm"}
+            %p.help-block Password is needed for delete your posts and/or account.
           %p &nbsp;
           .controls
             %input.btn.btn-primary{:type => "submit", :value => "Save"}

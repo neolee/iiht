@@ -9,12 +9,12 @@ module PXHelpers
     ESCAPE_HTML_PATTERN = Regexp.union(*ESCAPE_HTML.keys)
 
     # escape HTML string
-    def h(string)
+    def html_escape(string)
       string.to_s.gsub(ESCAPE_HTML_PATTERN){|c| ESCAPE_HTML[c] }
     end
 
     # truncate HTML string to designated length using nokogiri lib
-    def truncate_html(text, max_length, ellipsis = "...")
+    def html_truncate(text, max_length, ellipsis = "...")
       ellipsis_length = ellipsis.length     
       doc = Nokogiri::HTML::DocumentFragment.parse text
       content_length = doc.inner_text.length

@@ -51,8 +51,9 @@
         }
       },
       error: function(data) {
+        errorMsg = 'Failed. (Error code: ' + data.status + ')'
         $('##{alert_id}').removeClass('alert-info').addClass('alert-error');
-        $('##{alert_id}').text('Failed');
+        $('##{alert_id}').text(errorMsg);
       },
     });
 

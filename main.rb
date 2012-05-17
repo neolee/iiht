@@ -81,9 +81,26 @@ module IIHT
     end
 
     patch '/users/:id' do
-      if params[:id] == session[:user_id] then
+      if params[:id].to_i == session[:user_id].to_i then
         user = User.get(params[:id])
-        user.update(:email => params[:email], :password => params[:password])
+        email = params[:email]
+        current_password = params[:current_password]
+        new_password = params[:new_password]
+        
+        # check current password
+        if !user.password or user.password.empty? or password_check(current_password, user.password) then
+          if new_password and !new_password.empty? then
+            password_hash = password_encode(new_password)
+            user.update(:email => email, :password => password_hash)
+          else
+            if email and !email.empty? then
+              user.update(:email => params[:email])
+            end
+          end
+        else
+          # current password error, no change permitted
+          error 403
+        end
       end
     end
 
@@ -94,7 +111,7 @@ module IIHT
 
     patch '/posts/:id' do
       post = Post.get(params[:id])
-      if post.user_id == session[:user_id] then
+      if post.user_id == session[:user_id].to_i then
         post.update(:title => params[:title], :body => params[:body], :edited_at => Time.now)
       end
     end

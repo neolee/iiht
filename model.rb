@@ -11,7 +11,7 @@ class User
   property :username, String
   property :twitter, String, :length => 120
   property :email, String, :length => 120
-  property :password, String, :length => 120
+  property :password, String, :length => 200
   property :avatar, String, :length => 255
   property :enabled, Boolean, :default  => true
   property :created_at, DateTime

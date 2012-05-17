@@ -11,8 +11,12 @@ $('#formUser').submit(function(event) {
       $('#alert').text('Saved').fadeOut('slow');
     },
     error: function(data) {
+      errorMsg = 'Failed. (Error code: ' + data.status + ')'
+      if (data.status == 403)
+        errorMsg = 'Current password is not correct. No data change performed.'
+
       $('#alert').removeClass('alert-info').addClass('alert-error');
-      $('#alert').text('Failed');
+      $('#alert').text(errorMsg);
     },
   });
 

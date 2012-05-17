@@ -5,6 +5,7 @@ $: << File.join(File.dirname(__FILE__), '/helpers')
 require 'dt.rb'
 require 'html.rb'
 require 'http.rb'
+require 'password.rb'
 require 'string.rb'
 
 class Base < Sinatra::Base
@@ -13,6 +14,7 @@ class Base < Sinatra::Base
   register PXHelpers::DateTime
   register PXHelpers::HTML
   register PXHelpers::HTTP
+  register PXHelpers::Password
   register PXHelpers::String
 
   configure :development do
@@ -33,5 +35,6 @@ class Base < Sinatra::Base
   helpers PXHelpers::DateTime
   helpers PXHelpers::HTML
   helpers PXHelpers::HTTP
+  helpers PXHelpers::Password
   helpers PXHelpers::String
 end
