@@ -69,7 +69,7 @@ module IIHT
         :body       => params[:body],
         :created_at => Time.now
       )
-      post.user = User.first(:id => session[:user_id])
+      post.user_id = session[:user_id]
       post.save
 
       redirect '/posts/'
