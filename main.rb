@@ -13,7 +13,7 @@ module IIHT
     end
 
     # Filters
-    ["/", "/posts/*"].each do |path|
+    ["/", "/posts/*", "/users/*"].each do |path|
       before path do
         if !session[:user_id] then
           session[:previous_url] = request.path
