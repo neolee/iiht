@@ -49,6 +49,11 @@ module IIHT
       end
     end
 
+    get '/logout/?' do
+      session.clear
+      redirect '/'
+    end
+
     get '/', '/posts/?' do
       @posts = Post.all(:order => [ :created_at.desc ])
       haml :list

@@ -21,5 +21,10 @@
 						%a{:href => '/'}
 							%i.icon-search.icon-white
 							Search
+					- if session[:username] then
+						%li
+							%a{:href => '/logout'}
+								%i.icon-eject.icon-white
+								Logout
 
 = haml :_post_form, :locals => {:mode => "new"}
