@@ -13,13 +13,14 @@
       <![endif]-->
 
     / Le styles
-    %link{ :href => "/bootstrap/css/bootstrap.css", :type => "text/css", :rel => "stylesheet" }
-    %link{ :href => "/bootstrap/css/bootstrap-responsive.css", :type => "text/css", :rel => "stylesheet" }  
+    %link{ :href => "/bootstrap/css/bootstrap.min.css", :type => "text/css", :rel => "stylesheet" }
+    %link{ :href => "/bootstrap/css/bootstrap-responsive.min.css", :type => "text/css", :rel => "stylesheet" }  
 
     / Custom styles and scripts
     %link{ :href => "/css/styles.css", :type => "text/css", :rel => "stylesheet" }
     %script{ :type => "text/javascript", :src => "/js/jquery.min.js"}
     %script{ :type => "text/javascript", :src => "/js/jquery.validate.min.js"}
+    %script{ :type => "text/javascript", :src => "/bootstrap/js/bootstrap.min.js"}
     %script{ :type => "text/javascript", :src => "/js/base.js"}
 
     / Le fav and touch icons 
@@ -36,21 +37,5 @@
       .container= yield
 
     %div= haml :footer
-
-
-
-    / Placed at the end of the document so the pages load faster
-    %script{ :type => "text/javascript", :src =>"/bootstrap/js/basic/bootstrap-transition.js"}
-    %script{ :type => "text/javascript", :src =>"/bootstrap/js/basic/bootstrap-alert.js"}
-    %script{ :type => "text/javascript", :src =>"/bootstrap/js/basic/bootstrap-modal.js"}
-    %script{ :type => "text/javascript", :src =>"/bootstrap/js/basic/bootstrap-dropdown.js"}
-    %script{ :type => "text/javascript", :src =>"/bootstrap/js/basic/bootstrap-scrollspy.js"}
-    %script{ :type => "text/javascript", :src =>"/bootstrap/js/basic/bootstrap-tab.js"}
-    %script{ :type => "text/javascript", :src =>"/bootstrap/js/basic/bootstrap-tooltip.js"}
-    %script{ :type => "text/javascript", :src =>"/bootstrap/js/basic/bootstrap-popover.js"}
-    %script{ :type => "text/javascript", :src =>"/bootstrap/js/basic/bootstrap-button.js"}
-    %script{ :type => "text/javascript", :src =>"/bootstrap/js/basic/bootstrap-collapse.js"}
-    %script{ :type => "text/javascript", :src =>"/bootstrap/js/basic/bootstrap-carousel.js"}
-    %script{ :type => "text/javascript", :src =>"/bootstrap/js/basic/bootstrap-typeahead.js"}
 
     %img#spinner{:src => "/img/spinner.gif"}
