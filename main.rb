@@ -13,7 +13,7 @@ module IIHT
     end
 
     # Filters
-    ["/", "/posts/*", "/users/*"].each do |path|
+    ["/", "/posts*", "/users*"].each do |path|
       before path do
         if !session[:user_id]
           session[:previous_url] = request.path
@@ -102,10 +102,6 @@ module IIHT
       haml :post
     end
 
-    get '/posts/new/?' do
-      haml :new
-    end
-
     post '/posts/?' do
       post = Post.new(
         :title      => params[:title],
@@ -120,7 +116,7 @@ module IIHT
         error 400, error_msgs.join(';')
       end
 
-      redirect '/posts/'
+      redirect '/'
     end
 
     patch '/posts/:id' do

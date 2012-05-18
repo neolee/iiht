@@ -1,30 +1,30 @@
 .navbar.navbar-fixed-top
-	.navbar-inner
-		.container
-			%a.btn.btn-navbar{ "data-toggle".to_sym => "collapse", "data-target".to_sym => ".nav-collapse"}
-				%span.icon-bar
-				%span.icon-bar
-				%span.icon-bar
-			%a.brand{:href => '/'}
-				=(session[:username]?"#{session[:username]} : ":"") + "If I Have Time"
-			.nav-collapse
-				%ul.nav
-					%li
-						%a{:href => '/'}
-							%i.icon-home.icon-white
-							Home
-					%li
-						%a(data-toggle="modal" href="#modalNew")
-							%i.icon-plus.icon-white
-							New
-					%li
-						%a{:href => '/'}
-							%i.icon-search.icon-white
-							Search
-					- if session[:username]
-						%li
-							%a{:href => '/logout'}
-								%i.icon-eject.icon-white
-								Logout
+  .navbar-inner
+    .container
+      %a.btn.btn-navbar{ "data-toggle".to_sym => "collapse", "data-target".to_sym => ".nav-collapse"}
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      %a.brand{:href => '/'}
+        =(session[:user_id]?"#{session[:username]} : ":"") + "If I Have Time"
+      - if session[:user_id]
+        .nav-collapse
+          %ul.nav
+            %li
+              %a{:href => '/'}
+                %i.icon-home.icon-white
+                Home
+            %li
+              %a(data-toggle="modal" href="#modalNew")
+                %i.icon-plus.icon-white
+                New
+            %li
+              %a{:href => '/'}
+                %i.icon-search.icon-white
+                Search
+            %li
+              %a{:href => '/logout'}
+                %i.icon-eject.icon-white
+                Logout
 
 = haml :_post_form, :locals => {:mode => "new"}
