@@ -82,7 +82,7 @@ module IIHT
         data[:email] = email
       end
       if data.empty?
-        error 304
+        error 400, 'Nothing changed.'
       end
 
       if !user.update(data)

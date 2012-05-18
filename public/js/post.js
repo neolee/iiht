@@ -1,4 +1,12 @@
+$("##{form_id}").validate({
+    rules: {
+        title: "required",
+    }
+});
+
 $('##{commit_id}').click(function(event) {
+    if($('##{form_id}').valid() == false) return false;
+    
     $('##{alert_id}').removeClass('alert-success alert-error').addClass('alert-info');
     $('##{alert_id}').show().text('Saving...');
 

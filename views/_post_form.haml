@@ -19,12 +19,12 @@
         .control-group
           %label{:for => "title"} If I have time
           .controls
-            %input.input-xxlarge{:type => "text", :name => "title", :value => form_title, :autofocus => "autofocus"}
+            %input.input-xxlarge#title{:type => "text", :name => "title", :value => form_title, :autofocus => "autofocus"}
             %p.help-block What do you wanna do?
-          %p &nbsp;
+        .control-group
           %label{:for => "body"} which means
           .controls
-            %textarea.input-xxlarge{:rows => "10", :name => "body"}= form_body
+            %textarea.input-xxlarge#body{:rows => "10", :name => "body"}= form_body
             %p.help-block (Optional) details for that?
   .modal-footer
     .alert.alert-info{:id => alert_id}
@@ -32,7 +32,15 @@
     %a.btn.btn-primary{:id => commit_id}= commit_label
 
 :javascript
+  $("##{form_id}").validate({
+      rules: {
+          title: "required",
+      }
+  });
+
   $('##{commit_id}').click(function(event) {
+      if($('##{form_id}').valid() == false) return false;
+    
       $('##{alert_id}').removeClass('alert-success alert-error').addClass('alert-info');
       $('##{alert_id}').show().text('Saving...');
 

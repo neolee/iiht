@@ -1,4 +1,16 @@
+$("#formUser").validate({
+    rules: {
+        current_password: "required",
+        email: {
+            required: true,
+            email: true
+        }
+    }
+});
+
 $('#formUser').submit(function(event) {
+    if($('#formUser').valid() == false) return false;
+    
     $('#alert').removeClass('alert-success alert-error').addClass('alert-info');
     $('#alert').show().text('Saving...');
 
@@ -7,8 +19,9 @@ $('#formUser').submit(function(event) {
         url: $('#formUser').attr('action'),
         data: $('#formUser').serialize(),
         success: function(data) {
+            errorMsg = 'Saved.'
             $('#alert').removeClass('alert-info').addClass('alert-success');
-            $('#alert').text('Saved').fadeOut('slow');
+            $('#alert').text(errorMsg).fadeOut('slow');
         },
         error: function(data) {
             switch(data.status)
@@ -18,9 +31,6 @@ $('#formUser').submit(function(event) {
                 break;
                 case 403:
                 errorMsg = 'Current password is not correct. No data change performed.'
-                break;
-                case 304:
-                errorMsg = 'Nothing changed.'
                 break;
                 case 400:
                 errorMsg = 'Cannot save changes [Error: ' + data.responseText + '].'
