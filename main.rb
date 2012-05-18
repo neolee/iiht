@@ -87,11 +87,7 @@ module IIHT
 
       if !user.update(data)
         error_msgs = Array.new
-        user.errors.each do |e|
-          logger.info(e[0])
-          error_msgs << e[0]
-        end
-        logger.info(error_msgs)
+        user.errors.each {|e| error_msgs << e[0]}
         error 400, error_msgs.join(';')
       end
     end
@@ -99,6 +95,11 @@ module IIHT
     get '/', '/posts/?' do
       @posts = Post.all(:order => [ :created_at.desc ])
       haml :list
+    end
+
+    get '/posts/:id' do
+      @post = Post.get(params[:id])
+      haml :post
     end
 
     get '/posts/new/?' do
@@ -112,20 +113,26 @@ module IIHT
         :created_at => Time.now
       )
       post.user_id = session[:user_id]
-      post.save
+
+      if !post.save
+        error_msgs = Array.new
+        post.errors.each {|e| error_msgs << e[0]}
+        error 400, error_msgs.join(';')
+      end
 
       redirect '/posts/'
     end
 
-    get '/posts/:id' do
-      @post = Post.get(params[:id])
-      haml :post
-    end
-
     patch '/posts/:id' do
       post = Post.get(params[:id])
-      if post.user_id == session[:user_id].to_i
-        post.update(:title => params[:title], :body => params[:body], :edited_at => Time.now)
+      if post.user_id != session[:user_id].to_i
+        error 401
+      end
+        
+      if !post.update(:title => params[:title], :body => params[:body], :edited_at => Time.now)
+        error_msgs = Array.new
+        post.errors.each {|e| error_msgs << e[0]}
+        error 400, error_msgs.join(';')
       end
     end
 

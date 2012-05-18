@@ -51,7 +51,21 @@
               }
           },
           error: function(data) {
-              errorMsg = 'Failed. (Error code: ' + data.status + ')'
+              switch(data.status)
+              {
+                  case 401:
+                  errorMsg = 'You are not authorized to do this.'
+                  break;
+                  case 304:
+                  errorMsg = 'Nothing changed.'
+                  break;
+                  case 400:
+                  errorMsg = 'Cannot save changes [Error: ' + data.responseText + '].'
+                  break;
+                  default:
+                  errorMsg = 'Failed [Error code: ' + data.status + '].'
+              }
+
               $('##{alert_id}').removeClass('alert-info').addClass('alert-error');
               $('##{alert_id}').text(errorMsg);
           },

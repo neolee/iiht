@@ -23,10 +23,10 @@ $('#formUser').submit(function(event) {
                 errorMsg = 'Nothing changed.'
                 break;
                 case 400:
-                errorMsg = 'Cannot save changes. (' + data.responseText + ')'
+                errorMsg = 'Cannot save changes [Error: ' + data.responseText + '].'
                 break;
                 default:
-                errorMsg = 'Failed. (Error code: ' + data.status + ')'
+                errorMsg = 'Failed [Error code: ' + data.status + '].'
             }
 
             $('#alert').removeClass('alert-info').addClass('alert-error');
