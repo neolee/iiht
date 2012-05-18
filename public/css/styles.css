@@ -1,38 +1,38 @@
 html, body {
-  height: 100%;
+    height: 100%;
 }
 footer {
-  padding: 17px 0 18px 0;
-  border-top: 1px solid #eee;
+    padding: 17px 0 18px 0;
+    border-top: 1px solid #eee;
 }
 .wrapper {
-  min-height: 100%;
-  height: auto !important;
-  height: 100%;
-  margin: 0 auto -50px;
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -50px;
 }
 .push {
-  height: 50px;
+    height: 50px;
 }
 .wrapper > .container {
-  padding-top: 60px;
+    padding-top: 60px;
 }
 
 #spinner {
-  display: none;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  margin-top: -18px;
-  margin-left: -18px;
+    display: none;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-top: -18px;
+    margin-left: -18px;
 }
 
 .alert[id*='alert'] {
-  display: none;
+    display: none;
 }
 
 .modal {
-  display: none;
-  width: 800px;
-  margin-left: -400px;
+    display: none;
+    width: 800px;
+    margin-left: -400px;
 }

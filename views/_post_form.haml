@@ -33,29 +33,29 @@
 
 :javascript
   $('##{commit_id}').click(function(event) {
-    $('##{alert_id}').removeClass('alert-success alert-error').addClass('alert-info');
-    $('##{alert_id}').show().text('Saving...');
+      $('##{alert_id}').removeClass('alert-success alert-error').addClass('alert-info');
+      $('##{alert_id}').show().text('Saving...');
 
-    $.ajax({
-      type: $('##{form_id}').attr('method'),
-      url: $('##{form_id}').attr('action'),
-      data: $('##{form_id}').serialize(),
-      success: function(data) {
-        $('##{alert_id}').removeClass('alert-info').addClass('alert-success');
-        $('##{alert_id}').text('Saved').fadeOut('slow');
-        if ('#{locals[:mode]}' == 'new') {
-          location = '/';
-        }
-        else {
-          location.reload();
-        }
-      },
-      error: function(data) {
-        errorMsg = 'Failed. (Error code: ' + data.status + ')'
-        $('##{alert_id}').removeClass('alert-info').addClass('alert-error');
-        $('##{alert_id}').text(errorMsg);
-      },
-    });
+      $.ajax({
+          type: $('##{form_id}').attr('method'),
+          url: $('##{form_id}').attr('action'),
+          data: $('##{form_id}').serialize(),
+          success: function(data) {
+              $('##{alert_id}').removeClass('alert-info').addClass('alert-success');
+              $('##{alert_id}').text('Saved').fadeOut('slow');
+              if ('#{locals[:mode]}' == 'new') {
+                  location = '/';
+              }
+              else {
+                  location.reload();
+              }
+          },
+          error: function(data) {
+              errorMsg = 'Failed. (Error code: ' + data.status + ')'
+              $('##{alert_id}').removeClass('alert-info').addClass('alert-error');
+              $('##{alert_id}').text(errorMsg);
+          },
+      });
 
-    return false;
+      return false;
   });

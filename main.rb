@@ -54,27 +54,6 @@ module IIHT
       redirect '/'
     end
 
-    get '/', '/posts/?' do
-      @posts = Post.all(:order => [ :created_at.desc ])
-      haml :list
-    end
-
-    get '/posts/new/?' do
-      haml :new
-    end
-
-    post '/posts/?' do
-      post = Post.new(
-        :title      => params[:title],
-        :body       => params[:body],
-        :created_at => Time.now
-      )
-      post.user_id = session[:user_id]
-      post.save
-
-      redirect '/posts/'
-    end
-
     get '/users/:id' do
       @user = User.get(params[:id])
       haml :user
@@ -115,6 +94,27 @@ module IIHT
         logger.info(error_msgs)
         error 400, error_msgs.join(';')
       end
+    end
+
+    get '/', '/posts/?' do
+      @posts = Post.all(:order => [ :created_at.desc ])
+      haml :list
+    end
+
+    get '/posts/new/?' do
+      haml :new
+    end
+
+    post '/posts/?' do
+      post = Post.new(
+        :title      => params[:title],
+        :body       => params[:body],
+        :created_at => Time.now
+      )
+      post.user_id = session[:user_id]
+      post.save
+
+      redirect '/posts/'
     end
 
     get '/posts/:id' do
