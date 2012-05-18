@@ -10,7 +10,7 @@ class User
   property :id, Serial
   property :username, String
   property :twitter, String, :length => 120
-  property :email, String, :length => 120
+  property :email, String, :length => 120, :format => :email_address
   property :password, String, :length => 200
   property :avatar, String, :length => 255
   property :enabled, Boolean, :default  => true

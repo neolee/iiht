@@ -21,7 +21,7 @@
 						%a{:href => '/'}
 							%i.icon-search.icon-white
 							Search
-					- if session[:username] then
+					- if session[:username]
 						%li
 							%a{:href => '/logout'}
 								%i.icon-eject.icon-white

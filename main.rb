@@ -15,7 +15,7 @@ module IIHT
     # Filters
     ["/", "/posts/*", "/users/*"].each do |path|
       before path do
-        if !session[:user_id] then
+        if !session[:user_id]
           session[:previous_url] = request.path
           redirect '/login'
         end
@@ -39,7 +39,7 @@ module IIHT
       session[:user_id] = @user.id
       session[:username] = @user.username
 
-      if session[:previous_url] then
+      if session[:previous_url]
         redirect_to = session[:previous_url]
         session[:previous_url] = nil
         redirect redirect_to
@@ -81,26 +81,39 @@ module IIHT
     end
 
     patch '/users/:id' do
-      if params[:id].to_i == session[:user_id].to_i then
-        user = User.get(params[:id])
-        email = params[:email]
-        current_password = params[:current_password]
-        new_password = params[:new_password]
-        
-        # check current password
-        if !user.password or user.password.empty? or password_check(current_password, user.password) then
-          if new_password and !new_password.empty? then
-            password_hash = password_encode(new_password)
-            user.update(:email => email, :password => password_hash)
-          else
-            if email and !email.empty? then
-              user.update(:email => params[:email])
-            end
-          end
-        else
-          # current password error, no change permitted
-          error 403
+      if params[:id].to_i != session[:user_id].to_i
+        error 401
+      end
+
+      user = User.get(params[:id])
+      email = params[:email]
+      current_password = params[:current_password]
+      new_password = params[:new_password]
+      
+      # check current password
+      if user.password and !user.password.empty? and !password_check(current_password, user.password)
+        error 403
+      end
+
+      data = {}
+      if new_password and !new_password.empty?
+        data[:password] = password_encode(new_password)
+      end
+      if email and !email.empty?
+        data[:email] = email
+      end
+      if data.empty?
+        error 304
+      end
+
+      if !user.update(data)
+        error_msgs = Array.new
+        user.errors.each do |e|
+          logger.info(e[0])
+          error_msgs << e[0]
         end
+        logger.info(error_msgs)
+        error 400, error_msgs.join(';')
       end
     end
 
@@ -111,7 +124,7 @@ module IIHT
 
     patch '/posts/:id' do
       post = Post.get(params[:id])
-      if post.user_id == session[:user_id].to_i then
+      if post.user_id == session[:user_id].to_i
         post.update(:title => params[:title], :body => params[:body], :edited_at => Time.now)
       end
     end

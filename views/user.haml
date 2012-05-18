@@ -13,7 +13,7 @@
     %dd
       %a{:href => "https://twitter.com/#!/#{@user.twitter}"}
         = "@#{@user.twitter}"
-- if @user.id == session[:user_id].to_i then
+- if @user.id == session[:user_id].to_i
   #changeable{:style => "float:left;padding-top:12px"}
     %form.form-horizontal#formUser{:action => url_for("/users/#{@user.id}"), :method => "patch"}
       %fieldset

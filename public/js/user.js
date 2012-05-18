@@ -11,9 +11,23 @@ $('#formUser').submit(function(event) {
       $('#alert').text('Saved').fadeOut('slow');
     },
     error: function(data) {
-      errorMsg = 'Failed. (Error code: ' + data.status + ')'
-      if (data.status == 403)
+      switch(data.status)
+      {
+      case 401:
+        errorMsg = 'You are not authorized to do this.'
+        break;
+      case 403:
         errorMsg = 'Current password is not correct. No data change performed.'
+        break;
+      case 304:
+        errorMsg = 'Nothing changed.'
+        break;
+      case 400:
+        errorMsg = 'Failed. (' + data.responseText + ')'
+        break;
+      default:
+        errorMsg = 'Failed. (Error code: ' + data.status + ')'
+      }
 
       $('#alert').removeClass('alert-info').addClass('alert-error');
       $('#alert').text(errorMsg);
