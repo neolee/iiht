@@ -9,13 +9,13 @@ footer {
     min-height: 100%;
     height: auto !important;
     height: 100%;
-    margin: 0 auto -50px;
+    margin: 0 auto -60px;
 }
 .push {
-    height: 50px;
+    height: 60px;
 }
 .wrapper > .container {
-    padding-top: 60px;
+    padding-top: 70px;
 }
 
 #spinner {
