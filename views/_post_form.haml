@@ -25,7 +25,10 @@
           %label{:for => "body"} which means
           .controls
             %textarea.input-xxlarge#body{:rows => "10", :name => "body"}= form_body
-            %p.help-block (Optional) details for that?
+            %p.help-block
+              (Optional) details for that? 
+              %a{:href => "http://daringfireball.net/projects/markdown/"} Markdown 
+              supported.
   .modal-footer
     .alert.alert-info{:id => alert_id}
     %a.btn#btnClose(data-dismiss="modal")Close
