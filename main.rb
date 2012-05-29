@@ -23,10 +23,12 @@ module IIHT
     end
 
     # Routes
+    # login to start
     get '/login/?' do
       haml :login
     end
 
+    # twitter oauth login callback
     get "/auth/:provider/callback" do
       @auth = request.env['omniauth.auth']
       twitter = @auth['info']['nickname']
@@ -49,16 +51,19 @@ module IIHT
       end
     end
 
+    # logout
     get '/logout/?' do
       session.clear
       redirect '/'
     end
 
+    # show user profile
     get '/users/:id' do
       @user = User.get(params[:id])
       haml :user
     end
 
+    # update attrs of logged in user
     patch '/users/:id' do
       if params[:id].to_i != session[:user_id].to_i
         error 401
@@ -92,16 +97,19 @@ module IIHT
       end
     end
 
+    # show all posts
     get '/', '/posts/?' do
       @posts = Post.all(:order => [ :created_at.desc ])
       haml :list
     end
 
+    # show a post detail
     get '/posts/:id' do
       @post = Post.get(params[:id])
       haml :post
     end
 
+    # add new post
     post '/posts/?' do
       post = Post.new(
         :title      => params[:title],
@@ -119,6 +127,7 @@ module IIHT
       redirect '/'
     end
 
+    # edit a post
     patch '/posts/:id' do
       post = Post.get(params[:id])
       if post.user_id != session[:user_id].to_i
@@ -126,6 +135,24 @@ module IIHT
       end
         
       if !post.update(:title => params[:title], :body => params[:body], :edited_at => Time.now)
+        error_msgs = Array.new
+        post.errors.each {|e| error_msgs << e[0]}
+        error 400, error_msgs.join(';')
+      end
+    end
+    
+    # add a comment to a post
+    post '/posts/:id/comments' do
+      post = Post.get(params[:id])
+      
+      comment = Comment.new(
+        :body       => params[:comment],
+        :user_id    => session[:user_id],
+        :created_at => Time.now
+      )
+      post.comments << comment
+
+      if !post.save
         error_msgs = Array.new
         post.errors.each {|e| error_msgs << e[0]}
         error 400, error_msgs.join(';')

@@ -14,4 +14,32 @@
 %p
   = markdown(@post.body)
 
+%p &nbsp;
+
+- comments = @post.comments.all(:order => [:created_at.asc])
+.well
+  - comment_index = 1
+  - comments.each do |comment|
+    %h6 
+      = "##{comment_index} "
+      %a{:href => "/users/#{comment.user.id}"}= comment.user.username
+      = "commented at #{dt_fmt(comment.created_at)}"
+    %p= markdown(comment.body)
+    - comment_index += 1
+  - if comments.count > 0
+    %hr/
+
+  %form.form-vertical#formComment{:name => "formComment", :action => "/posts/#{@post.id}/comments", :method => "post"}
+    .control-group
+      %label{:for => "title"} Add a comment:
+      .controls
+        %textarea.input-xxlarge#body{:rows => "4", :name => "comment", :autofocus => "autofocus"}
+    .control-group
+      .controls
+        %input.btn.btn-primary{:type => "submit", :value => "Submit"}
+        %p &nbsp;
+        #alert.alert.alert-info        
+
+%script{ :type => "text/javascript", :src => "/js/comment.js"}
+
 = haml :_post_form, :locals => {:mode => "edit"}
