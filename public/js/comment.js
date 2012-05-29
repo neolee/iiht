@@ -16,6 +16,7 @@ $('#formComment').submit(function(event) {
         data: $('#formComment').serialize(),
         success: function(data) {
             errorMsg = 'Submitted.'
+            $('#comments').append(data);
             $('#alert').removeClass('alert-info').addClass('alert-success');
             $('#alert').text(errorMsg).fadeOut('slow');
         },

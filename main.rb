@@ -141,7 +141,7 @@ module IIHT
       end
     end
     
-    # add a comment to a post
+    # add a comment to a post and return successfully added comment for ajax updating
     post '/posts/:id/comments' do
       post = Post.get(params[:id])
       
@@ -157,6 +157,8 @@ module IIHT
         post.errors.each {|e| error_msgs << e[0]}
         error 400, error_msgs.join(';')
       end
+      
+      haml :_comment, :locals => {:index => post.comments.count-1, :comment => comment}, :layout => false
     end
   end
 end

@@ -1,0 +1,5 @@
+%h6 
+  = "##{index+1} "
+  %a{:href => "/users/#{comment.user.id}"}= comment.user.username
+  = "commented at #{dt_fmt(comment.created_at)}"
+= markdown(comment.body)
