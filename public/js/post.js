@@ -6,7 +6,7 @@ $("##{form_id}").validate({
 
 $('##{commit_id}').click(function(event) {
     if($('##{form_id}').valid() == false) return false;
-    
+  
     $('##{alert_id}').removeClass('alert-success alert-error').addClass('alert-info');
     $('##{alert_id}').show().text('Saving...');
 
@@ -15,13 +15,14 @@ $('##{commit_id}').click(function(event) {
         url: $('##{form_id}').attr('action'),
         data: $('##{form_id}').serialize(),
         success: function(data) {
+            $('#post').html(data);
             $('##{alert_id}').removeClass('alert-info').addClass('alert-success');
             $('##{alert_id}').text('Saved').fadeOut('slow');
             if ('#{locals[:mode]}' == 'new') {
                 location = '/';
             }
             else {
-                location.reload();
+                $('##{modal_id}').modal('hide');
             }
         },
         error: function(data) {

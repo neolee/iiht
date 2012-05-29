@@ -1,21 +1,5 @@
-- user = User.get(@post.user.id)
-%h3
-  = @post.title
-%h6
-  by 
-  %a{:href => url_for("/users/#{user.id}")}
-    = user.username
-  = (@post.edited_at.nil? ? "created at #{dt_fmt(@post.created_at)}" : "edited at #{dt_fmt(@post.edited_at)}")
-%p &nbsp;
-- if user.id == session[:user_id].to_i
-  %p
-    %a.btn(data-toggle="modal" href="#modalEdit")Edit
-  %p &nbsp;
-%p
-  = markdown(@post.body)
-
-%p &nbsp;
-
+#post
+  = haml :_post, :locals => {:post => @post}
 - comments = @post.comments.all(:order => [:created_at.asc])
 .well
   - if comments.count > 0
@@ -23,17 +7,15 @@
       - comments.each_with_index do |comment, index|
         = haml :_comment, :locals => {:index => index, :comment => comment}
     %hr/
-
   %form.form-vertical#formComment{:name => "formComment", :action => "/posts/#{@post.id}/comments", :method => "post"}
     .control-group
       %label{:for => "title"} Add a comment:
       .controls
-        %textarea.input-xxlarge#body{:rows => "4", :name => "comment", :autofocus => "autofocus"}
+        %textarea.input-xxlarge{:rows => "4", :name => "comment", :autofocus => "autofocus"}
     .control-group
       .controls
         %input.btn.btn-primary{:type => "submit", :value => "Submit"}
         #alert.alert.alert-info        
 
 %script{ :type => "text/javascript", :src => "/js/comment.js"}
-
 = haml :_post_form, :locals => {:mode => "edit"}

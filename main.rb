@@ -139,6 +139,8 @@ module IIHT
         post.errors.each {|e| error_msgs << e[0]}
         error 400, error_msgs.join(';')
       end
+      
+      haml :_post, :locals => {:post => post}, :layout => false
     end
     
     # add a comment to a post and return successfully added comment for ajax updating

@@ -1,0 +1,16 @@
+- user = User.get(post.user.id)
+%h3
+  = post.title
+%h6
+  by 
+  %a{:href => url_for("/users/#{user.id}")}
+    = user.username
+  = (post.edited_at.nil? ? "created at #{dt_fmt(post.created_at)}" : "edited at #{dt_fmt(post.edited_at)}")
+%p &nbsp;
+- if user.id == session[:user_id].to_i
+  %p
+    %a.btn(data-toggle="modal" href="#modalEdit")Edit
+  %p &nbsp;
+%p
+  = markdown(post.body)
+%p &nbsp;
