@@ -7,7 +7,7 @@
       - comments.each_with_index do |comment, index|
         = haml :_comment, :locals => {:index => index, :comment => comment}
     %hr/
-  %form.form-vertical#formComment{:name => "formComment", :action => "/posts/#{@post.id}/comments", :method => "post"}
+  %form#formComment{:name => "formComment", :action => "/posts/#{@post.id}/comments", :method => "post"}
     .control-group
       %label{:for => "title"} Add a comment:
       .controls

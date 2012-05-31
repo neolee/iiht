@@ -17,12 +17,12 @@
     %form.form-horizontal{:id => form_id, :action => form_action, :method => form_method}
       %fieldset
         .control-group
-          %label{:for => "title"} If I have time
+          %label.control-label{:for => "title"} If I have time
           .controls
             %input.input-xxlarge#title{:type => "text", :name => "title", :value => form_title, :autofocus => "autofocus"}
             %p.help-block What do you wanna do?
         .control-group
-          %label{:for => "body"} which means
+          %label.control-label{:for => "body"} which means
           .controls
             %textarea.input-xxlarge#body{:rows => "10", :name => "body"}= form_body
             %p.help-block

@@ -1,44 +1,43 @@
-#info{:style => "width:120px;float:left"}
-  %dl
-    %dt
-      User
-    %dd
-      = @user.username
-    %dt
-      Avatar
-    %dd
-      %img{:src => @user.avatar}
-    %dt
-      Twitter
-    %dd
-      %a{:href => "https://twitter.com/#!/#{@user.twitter}"}
-        = "@#{@user.twitter}"
-- if @user.id == session[:user_id].to_i
-  #changeable{:style => "float:left;padding-top:12px"}
-    %form.form-horizontal#formUser{:action => url_for("/users/#{@user.id}"), :method => "patch"}
-      %fieldset
-        .control-group
-          %label{:for => "current_password"} Current password
-          .controls
-            %input.input-xlarge#current_password{:type => "password", :name => "current_password", :autofocus => "autofocus"}
-            %p.help-block You need to fill in the current password to continue.
-        .control-group
-          %label{:for => "email"} Email address
-          .controls
-            %input.input-xlarge#email{:type => "text", :name => "email", :value => @user.email}
-            %p.help-block Email address can be use to reset your password.
-        .control-group
-          %label{:for => "new_password"} Change password
-          .controls
-            %input.input-xlarge#new_password{:type => "password", :name => "new_password"}
-          %label{:for => "new_password_confirm"} Repeat new password
-          .controls
-            %input.input-xlarge#new_password_confirm{:type => "password", :name => "new_password_confirm"}
-            %p.help-block Password is needed to delete your posts. Leave blanks if not to change.
-        .control-group
-          .controls
-            %input.btn.btn-primary{:type => "submit", :value => "Save"}
-            %p &nbsp;
-            #alert.alert.alert-info
-
-%script{ :type => "text/javascript", :src => "/js/user.js"}
+.row
+  .span2
+    %dl
+      %dt
+        User
+      %dd
+        = @user.username
+      %dt
+        Avatar
+      %dd
+        %img{:src => @user.avatar}
+      %dt
+        Twitter
+      %dd
+        %a{:href => "https://twitter.com/#!/#{@user.twitter}"}= "@#{@user.twitter}"
+  .span10
+    - if @user.id == session[:user_id].to_i
+      %form.form-horizontal#formUser{:action => url_for("/users/#{@user.id}"), :method => "patch"}
+        %fieldset
+          .control-group
+            %label.control-label{:for => "current_password"} Current password
+            .controls
+              %input.input-xlarge#current_password{:type => "password", :name => "current_password", :autofocus => "autofocus"}
+              %p.help-block You need to fill in the current password to continue.
+          .control-group
+            %label.control-label{:for => "email"} Email address
+            .controls
+              %input.input-xlarge#email{:type => "text", :name => "email", :value => @user.email}
+              %p.help-block Email address can be use to reset your password.
+          .control-group
+            %label.control-label{:for => "new_password"} Change password
+            .controls
+              %input.input-xlarge#new_password{:type => "password", :name => "new_password"}
+            %label.control-label{:for => "new_password_confirm"} Repeat new password
+            .controls
+              %input.input-xlarge#new_password_confirm{:type => "password", :name => "new_password_confirm"}
+              %p.help-block Password is needed to delete your posts. Leave blanks if not to change.
+          .control-group
+            .controls
+              %input.btn.btn-primary{:type => "submit", :value => "Save"}
+              %p &nbsp;
+              #alert.alert.alert-info
+      %script{ :type => "text/javascript", :src => "/js/user.js"}
