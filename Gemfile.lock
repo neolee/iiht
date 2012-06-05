@@ -2,7 +2,7 @@ GEM
   remote: http://rubygems.org/
   specs:
     addressable (2.2.8)
-    backports (2.5.3)
+    backports (2.6.1)
     bcrypt-ruby (3.0.1)
     daemons (1.1.8)
     data_mapper (1.2.0)
@@ -57,7 +57,7 @@ GEM
       sinatra (>= 0.9.1.1)
     eventmachine (0.12.10)
     fastercsv (1.5.5)
-    haml (3.1.5)
+    haml (3.1.6)
     hashie (1.2.0)
     httparty (0.8.3)
       multi_json (~> 1.0)
@@ -66,7 +66,7 @@ GEM
     json_pure (1.6.7)
     multi_json (1.0.4)
     multi_xml (0.5.1)
-    nokogiri (1.5.2)
+    nokogiri (1.5.3)
     oauth (0.4.6)
     omniauth (1.1.0)
       hashie (~> 1.2)
