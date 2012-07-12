@@ -9,7 +9,7 @@
     %hr/
   %form#formComment{:name => "formComment", :action => "/posts/#{@post.id}/comments", :method => "post"}
     .control-group
-      %label{:for => "title"} Add a comment:
+      %label{:for => "comment"} Add a comment:
       .controls
         %textarea.input-xxlarge{:rows => "4", :name => "comment", :autofocus => "autofocus"}
     .control-group
