@@ -68,7 +68,7 @@ GEM
     multi_xml (0.5.1)
     nokogiri (1.5.5)
     oauth (0.4.6)
-    omniauth (1.1.0)
+    omniauth (1.1.1)
       hashie (~> 1.2)
       rack
     omniauth-oauth (1.0.1)
