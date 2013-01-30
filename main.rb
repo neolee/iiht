@@ -7,7 +7,11 @@ module IIHT
   class Main < Base
     set :root, File.dirname(__FILE__)
 
-    use Rack::Session::Cookie
+    use Rack::Session::Cookie, :key => 'rack.session',
+                               :path => '/',
+                               :expire_after => 2592000,
+                               :secret => '6539a8628b0e7d39fabacf0479a159ef'
+    
     use OmniAuth::Builder do
       provider :twitter, 'TzadAI8gaQ0jMZVyp9SPg', 'hVVfW0TXBxWLJZrnfMTFCa69IkrvDhEpvEs0QkpekU'
     end
