@@ -11,7 +11,7 @@ module IIHT
                                :path => '/',
                                :expire_after => 2592000,
                                :secret => '6539a8628b0e7d39fabacf0479a159ef'
-    
+
     use OmniAuth::Builder do
       provider :twitter, 'TzadAI8gaQ0jMZVyp9SPg', 'hVVfW0TXBxWLJZrnfMTFCa69IkrvDhEpvEs0QkpekU'
     end
@@ -77,7 +77,7 @@ module IIHT
       email = params[:email]
       current_password = params[:current_password]
       new_password = params[:new_password]
-      
+
       # check current password
       if user.password and !user.password.empty? and !password_check(current_password, user.password)
         error 403
@@ -137,20 +137,20 @@ module IIHT
       if post.user_id != session[:user_id].to_i
         error 401
       end
-        
+
       if !post.update(:title => params[:title], :body => params[:body], :edited_at => Time.now)
         error_msgs = Array.new
         post.errors.each {|e| error_msgs << e[0]}
         error 400, error_msgs.join(';')
       end
-      
+
       haml :_post, :locals => {:post => post}, :layout => false
     end
-    
+
     # add a comment to a post and return successfully added comment for ajax updating
     post '/posts/:id/comments' do
       post = Post.get(params[:id])
-      
+
       comment = Comment.new(
         :body       => params[:comment],
         :user_id    => session[:user_id],
@@ -163,7 +163,7 @@ module IIHT
         post.errors.each {|e| error_msgs << e[0]}
         error 400, error_msgs.join(';')
       end
-      
+
       haml :_comment, :locals => {:index => post.comments.count-1, :comment => comment}, :layout => false
     end
   end
